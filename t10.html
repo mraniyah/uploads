@@ -24,13 +24,13 @@
     const query_id = Telegram.WebApp.query_id;
     const hash = Telegram.WebApp.hash;
     const auth_date = Telegram.WebApp.auth_date;
+    
 
     Telegram.WebApp.MainButton.setText('Choose Color').show().onClick(function () {
         const data = JSON.stringify({
             hex: colorPicker.color.hexString,
             rgb: colorPicker.color.rgb,
-            test: "test",
-            user: user,
+            user: user.id,
             query_id: query_id,
             hash: hash,
             auth_date: auth_date

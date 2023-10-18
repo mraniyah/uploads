@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Include iro.js library here if it's not already included -->
+    <!-- Example: <script src="iro.js"></script> -->
+</head>
+<body>
+    <div id="picker"></div>
+    <script type="text/javascript">
+        const colorPicker = new iro.ColorPicker('#picker', {
+            borderColor: "#ffffff",
+            borderWidth: 1,
+            width: Math.round(document.documentElement.clientWidth / 2),
+        });
+        colorPicker.on('color:change', function (color) {
+            document.body.style.background = color.hexString;
+        });
+
+        // Check if Telegram.WebApp is available and variables are defined
+        if (typeof Telegram.WebApp !== 'undefined' &&
+            Telegram.WebApp.user && Telegram.WebApp.user.id &&
+            Telegram.WebApp.query_id && Telegram.WebApp.hash &&
+            Telegram.WebApp.auth_date) {
+
+            const user = Telegram.WebApp.user.id;
+            const query_id = Telegram.WebApp.query_id;
+            const hash = Telegram.WebApp.hash;
+            const auth_date = Telegram.WebApp.auth_date;
+
+            Telegram.WebApp.ready();
+            Telegram.WebApp.MainButton.setText('Choose Color').show().onClick(function () {
+                const data = JSON.stringify({
+                    hex: colorPicker.color.hexString,
+                    rgb: colorPicker.color.rgb,
+                    "user": user,
+                    "query_id": query_id,
+                    "hash": hash,
+                    "auth_date": auth_date
+                });
+                Telegram.WebApp.sendData(data);
+                Telegram.WebApp.close();
+            });
+        } else {
+            // Handle the case where Telegram.WebApp or required variables are not defined
+            console.error("Telegram.WebApp or required variables are not defined.");
+        }
+    </script>
+</body>
+</html>

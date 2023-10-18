@@ -19,14 +19,13 @@
     colorPicker.on('color:change', function (color) {
         document.body.style.background = color.hexString;
     });
+    const user = Telegram.WebApp.user.id
+    const query_id = Telegram.WebApp.query_id
+    const hash = Telegram.WebApp.hash
+    const auth_date = Telegram.WebApp.auth_date
 
     Telegram.WebApp.ready();
     Telegram.WebApp.MainButton.setText('Choose Color').show().onClick(function () {
-
-        const user = Telegram.WebApp.user.id
-        const query_id = Telegram.WebApp.query_id
-        const hash = Telegram.WebApp.hash
-        const auth_date = Telegram.WebApp.auth_date
 
         const data = JSON.stringify({hex: colorPicker.color.hexString, rgb: colorPicker.color.rgb, "user": user, "query_id": query_id, "hash":hash, "auth_date":auth_date});
         Telegram.WebApp.sendData(data);

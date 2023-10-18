@@ -5,10 +5,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>NEW TEST</title>
+    <title>python-telegram-bot Example WebApp</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
-    
 </head>
 <script type="text/javascript">
     const colorPicker = new iro.ColorPicker('#picker', {
@@ -27,8 +26,14 @@
     const auth_date = Telegram.WebApp.auth_date;
 
     Telegram.WebApp.MainButton.setText('Choose Color').show().onClick(function () {
-
-        const data = JSON.stringify({hex: colorPicker.color.hexString, rgb: colorPicker.color.rgb, "user": user, "query_id": query_id, "hash":hash, "auth_date":auth_date});
+        const data = JSON.stringify({
+            hex: colorPicker.color.hexString,
+            rgb: colorPicker.color.rgb,
+            "user": user,
+            "query_id": query_id,
+            "hash": hash,
+            "auth_date": auth_date
+        });
         Telegram.WebApp.sendData(data);
         Telegram.WebApp.close();
     });

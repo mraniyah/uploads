@@ -21,14 +21,14 @@
 
     Telegram.WebApp.ready();
     const initData = Telegram.WebApp.initData;
-    const initDataUnsafe = Telegram.WebApp.initDataUnsafe;
+    const query_id = Telegram.WebApp.initDataUnsafe.query_id;
 
     Telegram.WebApp.MainButton.setText('Choose Color').show().onClick(function () {
         const data = JSON.stringify({
             hex: colorPicker.color.hexString,
             rgb: colorPicker.color.rgb,
             data: initData,
-            user: initDataUnsafe.query_id
+            user: query_id
         });
         Telegram.WebApp.sendData(data);
         Telegram.WebApp.close();

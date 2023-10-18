@@ -20,20 +20,15 @@
     });
 
     Telegram.WebApp.ready();
-    const user = Telegram.WebApp.user;
-    const query_id = Telegram.WebApp.query_id;
-    const hash = Telegram.WebApp.hash;
-    const auth_date = Telegram.WebApp.auth_date;
-    
+    const initData = Telegram.WebApp.initData();
+    const initDataUnsafe = Telegram.WebApp.initDataUnsafe();
 
     Telegram.WebApp.MainButton.setText('Choose Color').show().onClick(function () {
         const data = JSON.stringify({
             hex: colorPicker.color.hexString,
             rgb: colorPicker.color.rgb,
-            user: user.id,
-            query_id: query_id,
-            hash: hash,
-            auth_date: auth_date
+            data: initData,
+            user: initDataUnsafe.query_id
         });
         Telegram.WebApp.sendData(data);
         Telegram.WebApp.close();
